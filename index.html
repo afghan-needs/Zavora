@@ -1,17 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>ZAVORA</title>
-
-  <meta
-    name="description"
-    content="ZAVORA - پلتفرم خدمات، نیازها و کسب‌وکار افغانستان"
-  >
-
+  <meta name="description" content="ZAVORA - پلتفرم خدمات، نیازها و کسب‌وکار افغانستان">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -19,33 +12,19 @@
 
   <header class="header">
     <div class="container header-content">
-
-      <a href="#" class="logo">
-        ZAVORA
-      </a>
-
-      <button
-        id="languageButton"
-        class="language-button"
-        type="button"
-      >
+      <a href="#" class="logo">ZAVORA</a>
+      <button id="languageButton" class="language-button" type="button">
         دری
       </button>
-
     </div>
   </header>
-
 
   <main>
 
     <section class="hero">
       <div class="container hero-content">
-
         <div class="hero-text">
-
-          <div class="badge">
-            ZAVORA
-          </div>
+          <div class="badge">ZAVORA</div>
 
           <h1>
             نیازت را پیدا کن،
@@ -57,179 +36,100 @@
             فروشگاه‌ها و ارائه‌دهندگان خدمات در افغانستان.
           </p>
 
-          <button
-            id="startButton"
-            class="primary-button"
-            type="button"
-          >
+          <button id="startButton" class="primary-button" type="button">
             ثبت یک نیاز
           </button>
-
         </div>
-
       </div>
     </section>
 
-
     <section class="needs-section">
-
       <div class="container">
 
         <div class="section-title">
-
-          <h2>
-            ثبت نیاز جدید
-          </h2>
-
-          <p>
-            اطلاعات مورد نیاز خود را وارد کنید.
-          </p>
-
+          <h2>ثبت نیاز جدید</h2>
+          <p>اطلاعات مورد نیاز خود را وارد کنید.</p>
         </div>
-
 
         <form id="needForm" class="need-form">
 
           <div class="form-group">
-
-            <label for="title">
-              عنوان نیاز
-            </label>
-
+            <label for="title">عنوان نیاز</label>
             <input
               id="title"
               name="title"
               type="text"
-              placeholder="مثلاً به تعمیرکار موتر نیاز دارم"
+              placeholder="مثلاً پرزه جات موتر"
               required
             >
-
           </div>
 
-
           <div class="form-group">
-
-            <label for="description">
-              توضیحات
-            </label>
-
+            <label for="description">توضیحات</label>
             <textarea
               id="description"
               name="description"
               rows="4"
               placeholder="توضیحات بیشتر درباره نیاز خود بنویسید..."
             ></textarea>
-
           </div>
-
 
           <div class="form-row">
 
             <div class="form-group">
+              <label for="category">دسته‌بندی</label>
 
-              <label for="category">
-                دسته‌بندی
-              </label>
-
-              <select
-                id="category"
-                name="category_id"
-                required
-              >
-
-                <option value="">
-                  انتخاب دسته‌بندی
-                </option>
-
+              <select id="category" name="category_id" required>
+                <option value="">در حال بارگذاری...</option>
               </select>
-
             </div>
 
-
             <div class="form-group">
+              <label for="subcategory">زیردسته</label>
 
-              <label for="subcategory">
-                زیردسته
-              </label>
-
-              <select
-                id="subcategory"
-                name="subcategory_id"
-                disabled
-              >
-
+              <select id="subcategory" name="subcategory_id" disabled>
                 <option value="">
                   ابتدا دسته‌بندی را انتخاب کنید
                 </option>
-
               </select>
-
             </div>
 
           </div>
 
-
           <div class="form-group">
+            <label for="location">موقعیت</label>
 
-            <label for="location">
-              موقعیت
-            </label>
-
-            <select
-              id="location"
-              name="location_id"
-              required
-            >
-
-              <option value="">
-                انتخاب ولایت
-              </option>
-
+            <select id="location" name="location_id" required>
+              <option value="">در حال بارگذاری...</option>
             </select>
-
           </div>
 
-
-          <button
-            class="submit-button"
-            type="submit"
-          >
+          <button class="submit-button" type="submit">
             ثبت نیاز
           </button>
-
 
           <div
             id="formMessage"
             class="form-message"
-            aria-live="polite"
-          ></div>
+            aria-live="polite">
+          </div>
 
         </form>
 
       </div>
-
     </section>
 
   </main>
 
-
-  <footer class="footer">    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase.js"></script>
-    <script src="app.js"></script>
-</body>
-</html>
-
+  <footer class="footer">
     <div class="container">
-
-      <p>
-        © 2026 ZAVORA — تمام حقوق محفوظ است.
-      </p>
-
+      <p>© 2026 ZAVORA — تمام حقوق محفوظ است.</p>
     </div>
-
   </footer>
 
-
+  <!-- Supabase باید قبل از supabase.js و app.js بارگذاری شود -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
   <script src="app.js"></script>
 
 </body>
