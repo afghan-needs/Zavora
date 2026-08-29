@@ -119,7 +119,49 @@
       </div>
     </section>
 
-  </main>
+  </main<section id="authSection" class="auth-section">
+  <div class="container">
+    <h2>ورود به ZAVORA</h2>
+    <p>برای ثبت نیاز، وارد حساب کاربری خود شوید.</p>
+
+    <form id="authForm">
+
+      <label for="authEmail">ایمیل</label>
+      <input
+        id="authEmail"
+        type="email"
+        placeholder="ایمیل خود را وارد کنید"
+        required
+      >
+
+      <label for="authPassword">رمز عبور</label>
+      <input
+        id="authPassword"
+        type="password"
+        placeholder="رمز عبور"
+        required
+      >
+
+      <button id="loginButton" type="submit">
+        ورود
+      </button>
+
+      <button id="registerButton" type="button">
+        ساخت حساب جدید
+      </button>
+
+      <button
+        id="logoutButton"
+        type="button"
+        style="display:none;">
+        خروج
+      </button>
+
+      <div id="authMessage"></div>
+
+    </form>
+  </div>
+        </section>>
 
   <footer class="footer">
     <div class="container">
