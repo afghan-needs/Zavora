@@ -2,7 +2,6 @@
 <html lang="fa" dir="rtl">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -10,7 +9,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>ZAVORA | ثبت نیاز</title>
+    <title>ZAVORA | نیازهای افغانستان</title>
 
     <meta
         name="description"
@@ -21,23 +20,28 @@
         rel="stylesheet"
         href="style.css"
     >
-
 </head>
+
 
 <body>
 
-    <!-- Header -->
+    <!-- ==============================
+         HEADER
+    =============================== -->
 
     <header class="site-header">
 
         <div class="header-container">
 
-            <div class="logo">
+            <a
+                href="#"
+                class="logo"
+            >
                 ZAVORA
-            </div>
+            </a>
 
-            <div class="logo-subtitle">
-                نیازها و خدمات افغانستان
+            <div class="language-selector">
+                دری
             </div>
 
         </div>
@@ -45,20 +49,56 @@
     </header>
 
 
-    <!-- Main -->
+    <!-- ==============================
+         HERO
+    =============================== -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                نیازت را پیدا کن، راه‌حلش را بساز.
+            </h1>
+
+            <p>
+                یک پلتفرم برای ثبت نیازها، پیدا کردن خدمات،
+                فروشگاه‌ها و ارائه‌دهندگان خدمات در افغانستان.
+            </p>
+
+            <a
+                href="#needSection"
+                class="btn btn-primary"
+            >
+                ثبت یک نیاز
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         MAIN
+    =============================== -->
 
     <main class="main-container">
 
 
-        <!-- Need Section -->
+        <!-- ==============================
+             NEED FORM
+        =============================== -->
 
-        <section class="card need-card">
+        <section
+            id="needSection"
+            class="card need-card"
+        >
 
             <div class="section-header">
 
-                <h1>
+                <h2>
                     ثبت نیاز جدید
-                </h1>
+                </h2>
 
                 <p>
                     اطلاعات مورد نیاز خود را وارد کنید.
@@ -70,7 +110,7 @@
             <form id="needForm">
 
 
-                <!-- Title -->
+                <!-- TITLE -->
 
                 <div class="form-group">
 
@@ -90,7 +130,7 @@
                 </div>
 
 
-                <!-- Description -->
+                <!-- DESCRIPTION -->
 
                 <div class="form-group">
 
@@ -109,9 +149,11 @@
                 </div>
 
 
-                <!-- Phone -->
+                <!-- ==============================
+                     PHONE
+                =============================== -->
 
-                <div class="form-group phone-group">
+                <div class="form-group">
 
                     <label for="contactPhone">
                         شماره تلفن
@@ -135,7 +177,9 @@
                 </div>
 
 
-                <!-- Category -->
+                <!-- ==============================
+                     CATEGORY
+                =============================== -->
 
                 <div class="form-group">
 
@@ -158,7 +202,9 @@
                 </div>
 
 
-                <!-- Subcategory -->
+                <!-- ==============================
+                     SUBCATEGORY
+                =============================== -->
 
                 <div class="form-group">
 
@@ -182,12 +228,14 @@
                 </div>
 
 
-                <!-- Province -->
+                <!-- ==============================
+                     LOCATION
+                =============================== -->
 
                 <div class="form-group">
 
                     <label for="location">
-                        ولایت
+                        موقعیت
                     </label>
 
                     <select
@@ -205,7 +253,7 @@
                 </div>
 
 
-                <!-- Message -->
+                <!-- MESSAGE -->
 
                 <div
                     id="formMessage"
@@ -213,7 +261,7 @@
                 ></div>
 
 
-                <!-- Submit -->
+                <!-- SUBMIT -->
 
                 <button
                     type="submit"
@@ -222,27 +270,33 @@
                     ثبت نیاز
                 </button>
 
-
             </form>
 
         </section>
 
 
-        <!-- Authentication -->
+        <!-- ==============================
+             AUTHENTICATION
+        =============================== -->
 
-        <section class="card auth-card">
+        <section
+            id="authSection"
+            class="card auth-card"
+        >
 
             <h2>
                 ورود به ZAVORA
             </h2>
 
             <p class="section-description">
-                برای ثبت نیاز، وارد حساب کاربری شوید.
+                برای ثبت نیاز، وارد حساب کاربری خود شوید.
             </p>
 
 
             <form id="authForm">
 
+
+                <!-- EMAIL -->
 
                 <div class="form-group">
 
@@ -261,6 +315,8 @@
                 </div>
 
 
+                <!-- PASSWORD -->
+
                 <div class="form-group">
 
                     <label for="authPassword">
@@ -277,6 +333,8 @@
 
                 </div>
 
+
+                <!-- AUTH BUTTONS -->
 
                 <div class="auth-buttons">
 
@@ -310,6 +368,8 @@
                 </div>
 
 
+                <!-- AUTH MESSAGE -->
+
                 <div
                     id="authMessage"
                     class="form-message"
@@ -319,10 +379,13 @@
 
         </section>
 
+
     </main>
 
 
-    <!-- Footer -->
+    <!-- ==============================
+         FOOTER
+    =============================== -->
 
     <footer class="site-footer">
 
@@ -333,15 +396,19 @@
     </footer>
 
 
-    <!-- Supabase -->
+    <!-- ==============================
+         SUPABASE
+    =============================== -->
 
     <script
         src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
     ></script>
 
+
     <script src="supabase.js"></script>
 
     <script src="app.js"></script>
+
 
 </body>
 
