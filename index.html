@@ -1,178 +1,348 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZAVORA</title>
-  <meta name="description" content="ZAVORA - پلتفرم خدمات، نیازها و کسب‌وکار افغانستان">
-  <link rel="stylesheet" href="style.css">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ZAVORA | ثبت نیاز</title>
+
+    <meta
+        name="description"
+        content="ZAVORA - Afghanistan Needs & Services Marketplace"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
 
 <body>
 
-  <header class="header">
-    <div class="container header-content">
-      <a href="#" class="logo">ZAVORA</a>
-      <button id="languageButton" class="language-button" type="button">
-        دری
-      </button>
-    </div>
-  </header>
+    <!-- Header -->
 
-  <main>
+    <header class="site-header">
 
-    <section class="hero">
-      <div class="container hero-content">
-        <div class="hero-text">
-          <div class="badge">ZAVORA</div>
+        <div class="header-container">
 
-          <h1>
-            نیازت را پیدا کن،
-            <span>راه‌حلش را بساز.</span>
-          </h1>
-
-          <p>
-            یک پلتفرم برای ثبت نیازها، پیدا کردن خدمات،
-            فروشگاه‌ها و ارائه‌دهندگان خدمات در افغانستان.
-          </p>
-
-          <button id="startButton" class="primary-button" type="button">
-            ثبت یک نیاز
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <section class="needs-section">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>ثبت نیاز جدید</h2>
-          <p>اطلاعات مورد نیاز خود را وارد کنید.</p>
-        </div>
-
-        <form id="needForm" class="need-form">
-
-          <div class="form-group">
-            <label for="title">عنوان نیاز</label>
-            <input
-              id="title"
-              name="title"
-              type="text"
-              placeholder="مثلاً پرزه جات موتر"
-              required
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="description">توضیحات</label>
-            <textarea
-              id="description"
-              name="description"
-              rows="4"
-              placeholder="توضیحات بیشتر درباره نیاز خود بنویسید..."
-            ></textarea>
-          </div>
-
-          <div class="form-row">
-
-            <div class="form-group">
-              <label for="category">دسته‌بندی</label>
-
-              <select id="category" name="category_id" required>
-                <option value="">در حال بارگذاری...</option>
-              </select>
+            <div class="logo">
+                ZAVORA
             </div>
 
-            <div class="form-group">
-              <label for="subcategory">زیردسته</label>
-
-              <select id="subcategory" name="subcategory_id" disabled>
-                <option value="">
-                  ابتدا دسته‌بندی را انتخاب کنید
-                </option>
-              </select>
+            <div class="logo-subtitle">
+                نیازها و خدمات افغانستان
             </div>
 
-          </div>
+        </div>
 
-          <div class="form-group">
-            <label for="location">موقعیت</label>
+    </header>
 
-            <select id="location" name="location_id" required>
-              <option value="">در حال بارگذاری...</option>
-            </select>
-          </div>
 
-          <button class="submit-button" type="submit">
-            ثبت نیاز
-          </button>
+    <!-- Main -->
 
-          <div
-            id="formMessage"
-            class="form-message"
-            aria-live="polite">
-          </div>
+    <main class="main-container">
 
-        </form>
 
-      </div>
-    </section>
+        <!-- Need Section -->
 
-  </main<section id="authSection" class="auth-section">
-  <div class="container">
-    <h2>ورود به ZAVORA</h2>
-    <p>برای ثبت نیاز، وارد حساب کاربری خود شوید.</p>
+        <section class="card need-card">
 
-    <form id="authForm">
+            <div class="section-header">
 
-      <label for="authEmail">ایمیل</label>
-      <input
-        id="authEmail"
-        type="email"
-        placeholder="ایمیل خود را وارد کنید"
-        required
-      >
+                <h1>
+                    ثبت نیاز جدید
+                </h1>
 
-      <label for="authPassword">رمز عبور</label>
-      <input
-        id="authPassword"
-        type="password"
-        placeholder="رمز عبور"
-        required
-      >
+                <p>
+                    اطلاعات مورد نیاز خود را وارد کنید.
+                </p>
 
-      <button id="loginButton" type="submit">
-        ورود
-      </button>
+            </div>
 
-      <button id="registerButton" type="button">
-        ساخت حساب جدید
-      </button>
 
-      <button
-        id="logoutButton"
-        type="button"
-        style="display:none;">
-        خروج
-      </button>
+            <form id="needForm">
 
-      <div id="authMessage"></div>
 
-    </form>
-  </div>
-        </section>>
+                <!-- Title -->
 
-  <footer class="footer">
-    <div class="container">
-      <p>© 2026 ZAVORA — تمام حقوق محفوظ است.</p>
-    </div>
-  </footer>
+                <div class="form-group">
 
-  <!-- Supabase باید قبل از supabase.js و app.js بارگذاری شود -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase.js"></script>
-  <script src="app.js"></script>
+                    <label for="title">
+                        عنوان نیاز
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="مثلاً نیاز به تعمیر موتر"
+                        maxlength="150"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="form-group">
+
+                    <label for="description">
+                        توضیحات
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="5"
+                        maxlength="2000"
+                        placeholder="نیاز خود را به‌صورت کامل توضیح دهید..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Phone -->
+
+                <div class="form-group phone-group">
+
+                    <label for="contactPhone">
+                        شماره تلفن
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="contactPhone"
+                        name="contact_phone"
+                        inputmode="tel"
+                        autocomplete="tel"
+                        placeholder="0700000000"
+                        maxlength="13"
+                        required
+                    >
+
+                    <small>
+                        شماره تلفن افغانستان را وارد کنید.
+                    </small>
+
+                </div>
+
+
+                <!-- Category -->
+
+                <div class="form-group">
+
+                    <label for="category">
+                        دسته‌بندی
+                    </label>
+
+                    <select
+                        id="category"
+                        name="category"
+                        required
+                    >
+
+                        <option value="">
+                            در حال بارگذاری...
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Subcategory -->
+
+                <div class="form-group">
+
+                    <label for="subcategory">
+                        زیردسته
+                    </label>
+
+                    <select
+                        id="subcategory"
+                        name="subcategory"
+                        disabled
+                        required
+                    >
+
+                        <option value="">
+                            ابتدا دسته‌بندی را انتخاب کنید
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Province -->
+
+                <div class="form-group">
+
+                    <label for="location">
+                        ولایت
+                    </label>
+
+                    <select
+                        id="location"
+                        name="location"
+                        required
+                    >
+
+                        <option value="">
+                            در حال بارگذاری...
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Message -->
+
+                <div
+                    id="formMessage"
+                    class="form-message"
+                ></div>
+
+
+                <!-- Submit -->
+
+                <button
+                    type="submit"
+                    class="btn btn-primary btn-submit"
+                >
+                    ثبت نیاز
+                </button>
+
+
+            </form>
+
+        </section>
+
+
+        <!-- Authentication -->
+
+        <section class="card auth-card">
+
+            <h2>
+                ورود به ZAVORA
+            </h2>
+
+            <p class="section-description">
+                برای ثبت نیاز، وارد حساب کاربری شوید.
+            </p>
+
+
+            <form id="authForm">
+
+
+                <div class="form-group">
+
+                    <label for="authEmail">
+                        ایمیل
+                    </label>
+
+                    <input
+                        type="email"
+                        id="authEmail"
+                        placeholder="example@email.com"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="authPassword">
+                        رمز عبور
+                    </label>
+
+                    <input
+                        type="password"
+                        id="authPassword"
+                        placeholder="رمز عبور"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="auth-buttons">
+
+                    <button
+                        type="submit"
+                        id="loginButton"
+                        class="btn btn-primary"
+                    >
+                        ورود
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="registerButton"
+                        class="btn btn-secondary"
+                    >
+                        ساخت حساب جدید
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="logoutButton"
+                        class="btn btn-danger"
+                        style="display:none;"
+                    >
+                        خروج
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="authMessage"
+                    class="form-message"
+                ></div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer class="site-footer">
+
+        <p>
+            © 2026 ZAVORA — تمام حقوق محفوظ است.
+        </p>
+
+    </footer>
+
+
+    <!-- Supabase -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="supabase.js"></script>
+
+    <script src="app.js"></script>
 
 </body>
+
 </html>
