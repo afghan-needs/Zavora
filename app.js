@@ -1,17 +1,34 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const categorySelect = document.getElementById('category');
-    const subcategorySelect = document.getElementById('subcategory');
-    const locationSelect = document.getElementById('location');
-    const form = document.getElementById('needForm');
-    const message = document.getElementById('formMessage');
+    const categorySelect =
+        document.getElementById('category');
+
+    const subcategorySelect =
+        document.getElementById('subcategory');
+
+    const locationSelect =
+        document.getElementById('location');
+
+    const form =
+        document.getElementById('needForm');
+
+    const message =
+        document.getElementById('formMessage');
+
+    const contactPhoneInput =
+        document.getElementById('contactPhone');
+
 
     function showMessage(text, type = '') {
+
         if (!message) return;
 
         message.textContent = text;
-        message.className = 'form-message ' + type;
+
+        message.className =
+            'form-message ' + type;
     }
+
 
     // ==============================
     // Load Categories
@@ -22,20 +39,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         categorySelect.innerHTML =
             '<option value="">در حال بارگذاری...</option>';
 
-        const { data, error } = await supabaseClient
-            .from('categories')
-            .select('id, is_active, sort_order')
-            .eq('is_active', true)
-            .order('sort_order');
+        const { data, error } =
+            await supabaseClient
+                .from('categories')
+                .select(
+                    'id, is_active, sort_order'
+                )
+                .eq('is_active', true)
+                .order('sort_order');
 
         if (error) {
-            console.error('CATEGORY ERROR:', error);
+
+            console.error(
+                'CATEGORY ERROR:',
+                error
+            );
 
             categorySelect.innerHTML =
                 '<option value="">خطا در بارگذاری دسته‌بندی</option>';
 
             showMessage(
-                'خطا در بارگذاری دسته‌بندی: ' + error.message,
+                'خطا در بارگذاری دسته‌بندی: ' +
+                error.message,
                 'error'
             );
 
@@ -51,23 +76,30 @@ document.addEventListener('DOMContentLoaded', async () => {
                 await supabaseClient
                     .from('category_translations')
                     .select('name')
-                    .eq('category_id', category.id)
+                    .eq(
+                        'category_id',
+                        category.id
+                    )
                     .eq(
                         'language_id',
                         '6109220a-404e-43aa-ab72-1e5816687a8f'
                     )
                     .maybeSingle();
 
-            const option = document.createElement('option');
+            const option =
+                document.createElement('option');
 
-            option.value = category.id;
+            option.value =
+                category.id;
 
             option.textContent =
-                translation?.name || 'دسته‌بندی';
+                translation?.name ||
+                'دسته‌بندی';
 
             categorySelect.appendChild(option);
         }
     }
+
 
     // ==============================
     // Load Subcategories
@@ -91,14 +123,25 @@ document.addEventListener('DOMContentLoaded', async () => {
         const { data, error } =
             await supabaseClient
                 .from('subcategories')
-                .select('id, category_id, is_active, sort_order')
-                .eq('category_id', categoryId)
-                .eq('is_active', true)
+                .select(
+                    'id, category_id, is_active, sort_order'
+                )
+                .eq(
+                    'category_id',
+                    categoryId
+                )
+                .eq(
+                    'is_active',
+                    true
+                )
                 .order('sort_order');
 
         if (error) {
 
-            console.error('SUBCATEGORY ERROR:', error);
+            console.error(
+                'SUBCATEGORY ERROR:',
+                error
+            );
 
             subcategorySelect.innerHTML =
                 '<option value="">خطا در بارگذاری زیردسته</option>';
@@ -125,18 +168,25 @@ document.addEventListener('DOMContentLoaded', async () => {
                     )
                     .maybeSingle();
 
-            const option = document.createElement('option');
+            const option =
+                document.createElement('option');
 
-            option.value = subcategory.id;
+            option.value =
+                subcategory.id;
 
             option.textContent =
-                translation?.name || 'زیردسته';
+                translation?.name ||
+                'زیردسته';
 
-            subcategorySelect.appendChild(option);
+            subcategorySelect.appendChild(
+                option
+            );
         }
 
-        subcategorySelect.disabled = false;
+        subcategorySelect.disabled =
+            false;
     }
+
 
     // ==============================
     // Load Provinces
@@ -147,16 +197,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         locationSelect.innerHTML =
             '<option value="">در حال بارگذاری...</option>';
 
-        const { data: level, error: levelError } =
-            await supabaseClient
-                .from('administrative_levels')
-                .select('id')
-                .eq('level_code', 'province')
-                .maybeSingle();
+        const {
+            data: level,
+            error: levelError
+        } = await supabaseClient
+            .from('administrative_levels')
+            .select('id')
+            .eq(
+                'level_code',
+                'province'
+            )
+            .maybeSingle();
 
         if (levelError || !level) {
 
-            console.error('LEVEL ERROR:', levelError);
+            console.error(
+                'LEVEL ERROR:',
+                levelError
+            );
 
             locationSelect.innerHTML =
                 '<option value="">خطا در سطح ولایت</option>';
@@ -170,13 +228,24 @@ document.addEventListener('DOMContentLoaded', async () => {
                 .select(
                     'id, name_native, name_english, code'
                 )
-                .eq('level_id', level.id)
-                .eq('is_active', true)
-                .order('name_english');
+                .eq(
+                    'level_id',
+                    level.id
+                )
+                .eq(
+                    'is_active',
+                    true
+                )
+                .order(
+                    'name_english'
+                );
 
         if (error) {
 
-            console.error('PROVINCE ERROR:', error);
+            console.error(
+                'PROVINCE ERROR:',
+                error
+            );
 
             locationSelect.innerHTML =
                 '<option value="">خطا در بارگذاری ولایت‌ها</option>';
@@ -195,17 +264,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         data.forEach(province => {
 
-            const option = document.createElement('option');
+            const option =
+                document.createElement('option');
 
-            option.value = province.id;
+            option.value =
+                province.id;
 
             option.textContent =
                 province.name_native ||
                 province.name_english;
 
-            locationSelect.appendChild(option);
+            locationSelect.appendChild(
+                option
+            );
         });
     }
+
 
     // ==============================
     // Events
@@ -214,130 +288,317 @@ document.addEventListener('DOMContentLoaded', async () => {
     categorySelect.addEventListener(
         'change',
         () => {
+
             loadSubcategories(
                 categorySelect.value
             );
+
         }
     );
+
 
     // ==============================
     // Submit Need
     // ==============================
 
-    form.addEventListener('submit', async event => {
+    form.addEventListener(
+        'submit',
+        async event => {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        showMessage('');
+            showMessage('');
 
-        const title =
-            document.getElementById('title')
-                .value.trim();
 
-        const description =
-            document.getElementById('description')
-                .value.trim();
+            // ==============================
+            // Get values
+            // ==============================
 
-        const categoryId =
-            categorySelect.value;
+            const title =
+                document.getElementById(
+                    'title'
+                ).value.trim();
 
-        const subcategoryId =
-            subcategorySelect.value;
 
-        const locationId =
-            locationSelect.value;
+            const description =
+                document.getElementById(
+                    'description'
+                ).value.trim();
 
-        if (!title) {
+
+            const categoryId =
+                categorySelect.value;
+
+
+            const subcategoryId =
+                subcategorySelect.value;
+
+
+            const locationId =
+                locationSelect.value;
+
+
+            const contactPhone =
+                contactPhoneInput
+                    ? contactPhoneInput.value.trim()
+                    : '';
+
+
+            // ==============================
+            // Validation
+            // ==============================
+
+            if (!title) {
+
+                showMessage(
+                    'عنوان نیاز را وارد کنید.',
+                    'error'
+                );
+
+                return;
+            }
+
+
+            if (!categoryId) {
+
+                showMessage(
+                    'دسته‌بندی را انتخاب کنید.',
+                    'error'
+                );
+
+                return;
+            }
+
+
+            if (!subcategoryId) {
+
+                showMessage(
+                    'زیردسته را انتخاب کنید.',
+                    'error'
+                );
+
+                return;
+            }
+
+
+            if (!locationId) {
+
+                showMessage(
+                    'ولایت را انتخاب کنید.',
+                    'error'
+                );
+
+                return;
+            }
+
+
+            if (!contactPhone) {
+
+                showMessage(
+                    'شماره تلفن خود را وارد کنید.',
+                    'error'
+                );
+
+                return;
+            }
+
+
+            // ==============================
+            // Normalize phone
+            // ==============================
+
+            const normalizedPhone =
+                contactPhone
+                    .replace(/\s+/g, '')
+                    .replace(/-/g, '');
+
+
+            // ==============================
+            // Afghanistan phone validation
+            // ==============================
+
+            const phoneRegex =
+                /^(07\d{8}|\+937\d{8})$/;
+
+
+            if (!phoneRegex.test(
+                normalizedPhone
+            )) {
+
+                showMessage(
+                    'شماره تلفن معتبر افغانستان وارد کنید. مثال: 0700000000',
+                    'error'
+                );
+
+                return;
+            }
+
+
+            // ==============================
+            // Get authenticated user
+            // ==============================
+
+            const {
+                data: userData,
+                error: userError
+            } =
+                await supabaseClient.auth.getUser();
+
+
+            if (
+                userError ||
+                !userData ||
+                !userData.user
+            ) {
+
+                showMessage(
+                    'لطفاً ابتدا وارد حساب کاربری شوید.',
+                    'error'
+                );
+
+                return;
+            }
+
+
+            // ==============================
+            // Disable submit button
+            // ==============================
+
+            const submitButton =
+                form.querySelector(
+                    'button[type="submit"]'
+                );
+
+
+            if (submitButton) {
+
+                submitButton.disabled =
+                    true;
+
+                submitButton.textContent =
+                    'در حال ثبت...';
+            }
+
+
             showMessage(
-                'عنوان نیاز را وارد کنید.',
-                'error'
-            );
-            return;
-        }
-
-        if (!categoryId) {
-            showMessage(
-                'دسته‌بندی را انتخاب کنید.',
-                'error'
-            );
-            return;
-        }
-
-        if (!subcategoryId) {
-            showMessage(
-                'زیردسته را انتخاب کنید.',
-                'error'
-            );
-            return;
-        }
-
-        if (!locationId) {
-            showMessage(
-                'ولایت را انتخاب کنید.',
-                'error'
-            );
-            return;
-        }
-
-        const {
-            data: userData,
-            error: userError
-        } = await supabaseClient.auth.getUser();
-
-        if (userError || !userData.user) {
-
-            showMessage(
-                'لطفاً ابتدا وارد حساب کاربری شوید.',
-                'error'
+                'در حال ثبت نیاز...'
             );
 
-            return;
-        }
 
-        const { data, error } =
-            await supabaseClient.rpc(
-                'create_need',
-                {
-                    p_user_id: userData.user.id,
-                    p_title: title,
-                    p_description:
-                        description || null,
-                    p_category_id: categoryId,
-                    p_subcategory_id:
-                        subcategoryId,
-                    p_location_id: locationId,
-                    p_status: 'active'
+            try {
+
+                // ==============================
+                // Create Need
+                // ==============================
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient.rpc(
+                        'create_need',
+                        {
+
+                            p_user_id:
+                                userData.user.id,
+
+                            p_title:
+                                title,
+
+                            p_description:
+                                description ||
+                                null,
+
+                            p_category_id:
+                                categoryId,
+
+                            p_subcategory_id:
+                                subcategoryId,
+
+                            p_location_id:
+                                locationId,
+
+                            p_contact_phone:
+                                normalizedPhone,
+
+                            p_status:
+                                'active'
+                        }
+                    );
+
+
+                if (error) {
+
+                    console.error(
+                        'CREATE NEED ERROR:',
+                        error
+                    );
+
+                    showMessage(
+                        'خطا در ثبت نیاز: ' +
+                        error.message,
+                        'error'
+                    );
+
+                    return;
                 }
-            );
 
-        if (error) {
 
-            console.error(
-                'CREATE NEED ERROR:',
-                error
-            );
+                console.log(
+                    'Need created:',
+                    data
+                );
 
-            showMessage(
-                'خطا در ثبت نیاز: ' +
-                error.message,
-                'error'
-            );
 
-            return;
+                // ==============================
+                // Success
+                // ==============================
+
+                showMessage(
+                    'نیاز شما با موفقیت ثبت شد.',
+                    'success'
+                );
+
+
+                form.reset();
+
+
+                subcategorySelect.innerHTML =
+                    '<option value="">ابتدا دسته‌بندی را انتخاب کنید</option>';
+
+
+                subcategorySelect.disabled =
+                    true;
+
+
+            } catch (error) {
+
+                console.error(
+                    'UNEXPECTED ERROR:',
+                    error
+                );
+
+                showMessage(
+                    'خطای غیرمنتظره هنگام ثبت نیاز.',
+                    'error'
+                );
+
+
+            } finally {
+
+                if (submitButton) {
+
+                    submitButton.disabled =
+                        false;
+
+                    submitButton.textContent =
+                        'ثبت نیاز';
+                }
+            }
+
         }
+    );
 
-        showMessage(
-            'نیاز شما با موفقیت ثبت شد.',
-            'success'
-        );
-
-        form.reset();
-
-        subcategorySelect.innerHTML =
-            '<option value="">ابتدا دسته‌بندی را انتخاب کنید</option>';
-
-        subcategorySelect.disabled = true;
-    });
 
     // ==============================
     // Start
