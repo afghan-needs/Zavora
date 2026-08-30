@@ -1,9 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
-    // ==============================
-    // Need Form Elements
-    // ==============================
-
     const categorySelect =
         document.getElementById('category');
 
@@ -23,9 +19,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('contactPhone');
 
 
-    // ==============================
-    // Authentication Elements
-    // ==============================
+    // ==========================================
+    // Message
+    // ==========================================
+
+    function showMessage(text, type = '') {
+
+        if (!message) return;
+
+        message.textContent = text;
+
+        message.className =
+            'form-message ' + type;
+    }
+
+
+    // ==========================================
+    // Authentication
+    // ==========================================
 
     const authForm =
         document.getElementById('authForm');
@@ -49,25 +60,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('authMessage');
 
 
-    // ==============================
-    // Message
-    // ==============================
-
-    function showMessage(text, type = '') {
-
-        if (!message) return;
-
-        message.textContent = text;
-
-        message.className =
-            'form-message ' + type;
-    }
-
-
-    // ==============================
-    // Authentication State
-    // ==============================
-
     async function updateAuthState() {
 
         const {
@@ -79,7 +71,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (error) {
 
             console.error(
-                'AUTH STATE ERROR:',
+                'AUTH ERROR:',
                 error
             );
 
@@ -89,52 +81,41 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (user) {
 
-            if (loginButton)
-                loginButton.style.display = 'none';
+            loginButton.style.display =
+                'none';
 
-            if (registerButton)
-                registerButton.style.display = 'none';
+            registerButton.style.display =
+                'none';
 
-            if (logoutButton)
-                logoutButton.style.display = 'block';
+            logoutButton.style.display =
+                'block';
 
+            authMessage.textContent =
+                'وارد حساب شده‌اید: ' +
+                user.email;
 
-            if (authMessage) {
-
-                authMessage.textContent =
-                    'وارد حساب شده‌اید: ' +
-                    user.email;
-
-                authMessage.className =
-                    'form-message success';
-            }
+            authMessage.className =
+                'form-message success';
 
         } else {
 
-            if (loginButton)
-                loginButton.style.display = 'block';
+            loginButton.style.display =
+                'block';
 
-            if (registerButton)
-                registerButton.style.display = 'block';
+            registerButton.style.display =
+                'block';
 
-            if (logoutButton)
-                logoutButton.style.display = 'none';
+            logoutButton.style.display =
+                'none';
 
-
-            if (authMessage) {
-
-                authMessage.textContent = '';
-
-                authMessage.className =
-                    'form-message';
-            }
+            authMessage.textContent = '';
         }
     }
 
 
-    // ==============================
+    // ==========================================
     // Login
-    // ==============================
+    // ==========================================
 
     if (authForm) {
 
@@ -180,11 +161,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 if (error) {
 
-                    console.error(
-                        'LOGIN ERROR:',
-                        error
-                    );
-
                     authMessage.textContent =
                         'ورود ناموفق بود: ' +
                         error.message;
@@ -196,13 +172,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
 
 
-                authMessage.textContent =
-                    'با موفقیت وارد شدید.';
-
-                authMessage.className =
-                    'form-message success';
-
-
                 authPassword.value = '';
 
 
@@ -212,9 +181,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
 
-    // ==============================
+    // ==========================================
     // Register
-    // ==============================
+    // ==========================================
 
     if (registerButton) {
 
@@ -258,7 +227,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
                 const {
-                    data,
                     error
                 } =
                     await supabaseClient.auth
@@ -269,11 +237,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
                 if (error) {
-
-                    console.error(
-                        'REGISTER ERROR:',
-                        error
-                    );
 
                     authMessage.textContent =
                         'ثبت‌نام ناموفق بود: ' +
@@ -286,14 +249,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
 
 
-                console.log(
-                    'REGISTERED USER:',
-                    data?.user
-                );
-
-
                 authMessage.textContent =
-                    'حساب ساخته شد. ایمیل خود را برای تأیید بررسی کنید.';
+                    'حساب ساخته شد. ایمیل خود را بررسی کنید.';
 
                 authMessage.className =
                     'form-message success';
@@ -302,9 +259,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
 
-    // ==============================
+    // ==========================================
     // Logout
-    // ==============================
+    // ==========================================
 
     if (logoutButton) {
 
@@ -321,11 +278,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 if (error) {
 
-                    console.error(
-                        'LOGOUT ERROR:',
-                        error
-                    );
-
                     authMessage.textContent =
                         'خطا در خروج از حساب.';
 
@@ -336,27 +288,17 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
 
 
-                authMessage.textContent =
-                    'از حساب خارج شدید.';
-
-                authMessage.className =
-                    'form-message success';
-
-
                 await updateAuthState();
             }
         );
     }
 
 
-    // ==============================
+    // ==========================================
     // Load Categories
-    // ==============================
+    // ==========================================
 
     async function loadCategories() {
-
-        if (!categorySelect) return;
-
 
         categorySelect.innerHTML =
             '<option value="">در حال بارگذاری...</option>';
@@ -387,17 +329,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 error
             );
 
-
             categorySelect.innerHTML =
-                '<option value="">خطا در بارگذاری دسته‌بندی</option>';
-
-
-            showMessage(
-                'خطا در بارگذاری دسته‌بندی: ' +
-                error.message,
-                'error'
-            );
-
+                '<option value="">خطا</option>';
 
             return;
         }
@@ -410,11 +343,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         for (const category of data) {
 
             const {
-                data: translation,
-                error: translationError
+                data: translation
             } =
                 await supabaseClient
-                    .from('category_translations')
+                    .from(
+                        'category_translations'
+                    )
                     .select('name')
                     .eq(
                         'category_id',
@@ -427,17 +361,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                     .maybeSingle();
 
 
-            if (translationError) {
-
-                console.error(
-                    'CATEGORY TRANSLATION ERROR:',
-                    translationError
-                );
-            }
-
-
             const option =
-                document.createElement('option');
+                document.createElement(
+                    'option'
+                );
 
 
             option.value =
@@ -456,21 +383,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
 
-    // ==============================
+    // ==========================================
     // Load Subcategories
-    // ==============================
+    // ==========================================
 
     async function loadSubcategories(
         categoryId
     ) {
-
-        if (!subcategorySelect)
-            return;
-
-
-        subcategorySelect.innerHTML =
-            '<option value="">در حال بارگذاری...</option>';
-
 
         subcategorySelect.disabled =
             true;
@@ -483,6 +402,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             return;
         }
+
+
+        subcategorySelect.innerHTML =
+            '<option value="">در حال بارگذاری...</option>';
 
 
         const {
@@ -514,10 +437,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 error
             );
 
-
             subcategorySelect.innerHTML =
-                '<option value="">خطا در بارگذاری زیردسته</option>';
-
+                '<option value="">خطا</option>';
 
             return;
         }
@@ -530,11 +451,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         for (const subcategory of data) {
 
             const {
-                data: translation,
-                error: translationError
+                data: translation
             } =
                 await supabaseClient
-                    .from('subcategory_translations')
+                    .from(
+                        'subcategory_translations'
+                    )
                     .select('name')
                     .eq(
                         'subcategory_id',
@@ -547,17 +469,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                     .maybeSingle();
 
 
-            if (translationError) {
-
-                console.error(
-                    'SUBCATEGORY TRANSLATION ERROR:',
-                    translationError
-                );
-            }
-
-
             const option =
-                document.createElement('option');
+                document.createElement(
+                    'option'
+                );
 
 
             option.value =
@@ -580,15 +495,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
 
-    // ==============================
+    // ==========================================
     // Load Provinces
-    // ==============================
+    // ==========================================
 
     async function loadProvinces() {
-
-        if (!locationSelect)
-            return;
-
 
         locationSelect.innerHTML =
             '<option value="">در حال بارگذاری...</option>';
@@ -599,7 +510,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             error: levelError
         } =
             await supabaseClient
-                .from('administrative_levels')
+                .from(
+                    'administrative_levels'
+                )
                 .select('id')
                 .eq(
                     'level_code',
@@ -613,15 +526,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             !level
         ) {
 
-            console.error(
-                'LEVEL ERROR:',
-                levelError
-            );
-
-
             locationSelect.innerHTML =
                 '<option value="">خطا در سطح ولایت</option>';
-
 
             return;
         }
@@ -632,7 +538,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             error
         } =
             await supabaseClient
-                .from('administrative_units')
+                .from(
+                    'administrative_units'
+                )
                 .select(
                     'id, name_native, name_english, code'
                 )
@@ -655,18 +563,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 'PROVINCE ERROR:',
                 error
             );
-
-
-            locationSelect.innerHTML =
-                '<option value="">خطا در بارگذاری ولایت‌ها</option>';
-
-
-            showMessage(
-                'خطا در بارگذاری ولایت‌ها: ' +
-                error.message,
-                'error'
-            );
-
 
             return;
         }
@@ -702,9 +598,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
 
-    // ==============================
-    // Category Change
-    // ==============================
+    // ==========================================
+    // Category Event
+    // ==========================================
 
     if (categorySelect) {
 
@@ -720,9 +616,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
 
-    // ==============================
+    // ==========================================
     // Submit Need
-    // ==============================
+    // ==========================================
 
     if (form) {
 
@@ -736,43 +632,37 @@ document.addEventListener('DOMContentLoaded', async () => {
                 showMessage('');
 
 
-                // ==============================
-                // Get Values
-                // ==============================
-
                 const title =
                     document.getElementById(
                         'title'
-                    )?.value.trim();
+                    ).value.trim();
 
 
                 const description =
                     document.getElementById(
                         'description'
-                    )?.value.trim();
+                    ).value.trim();
 
 
                 const categoryId =
-                    categorySelect?.value;
+                    categorySelect.value;
 
 
                 const subcategoryId =
-                    subcategorySelect?.value;
+                    subcategorySelect.value;
 
 
                 const locationId =
-                    locationSelect?.value;
+                    locationSelect.value;
 
 
                 const contactPhone =
-                    contactPhoneInput
-                        ?.value
-                        .trim();
+                    contactPhoneInput.value.trim();
 
 
-                // ==============================
-                // Validate Title
-                // ==============================
+                // ==================================
+                // Validation
+                // ==================================
 
                 if (!title) {
 
@@ -785,10 +675,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
 
 
-                // ==============================
-                // Validate Category
-                // ==============================
-
                 if (!categoryId) {
 
                     showMessage(
@@ -799,10 +685,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                     return;
                 }
 
-
-                // ==============================
-                // Validate Subcategory
-                // ==============================
 
                 if (!subcategoryId) {
 
@@ -815,10 +697,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
 
 
-                // ==============================
-                // Validate Location
-                // ==============================
-
                 if (!locationId) {
 
                     showMessage(
@@ -830,10 +708,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
 
 
-                // ==============================
-                // Validate Phone
-                // ==============================
-
                 if (!contactPhone) {
 
                     showMessage(
@@ -844,6 +718,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                     return;
                 }
 
+
+                // ==================================
+                // Normalize Phone
+                // ==================================
 
                 const normalizedPhone =
                     contactPhone
@@ -870,20 +748,20 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
 
 
-                // ==============================
-                // Get Current User
-                // ==============================
+                // ==================================
+                // Current User
+                // ==================================
 
                 const {
                     data: userData,
                     error: userError
                 } =
-                    await supabaseClient.auth.getUser();
+                    await supabaseClient.auth
+                        .getUser();
 
 
                 if (
                     userError ||
-                    !userData ||
                     !userData.user
                 ) {
 
@@ -896,9 +774,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
 
 
-                // ==============================
-                // Submit Button
-                // ==============================
+                // ==================================
+                // Button
+                // ==================================
 
                 const submitButton =
                     form.querySelector(
@@ -906,26 +784,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                     );
 
 
-                if (submitButton) {
+                submitButton.disabled =
+                    true;
 
-                    submitButton.disabled =
-                        true;
-
-                    submitButton.textContent =
-                        'در حال ثبت...';
-                }
-
-
-                showMessage(
-                    'در حال ثبت نیاز...'
-                );
+                submitButton.textContent =
+                    'در حال ثبت...';
 
 
                 try {
 
-                    // ==============================
-                    // Create Need
-                    // ==============================
+                    // ==================================
+                    // RPC
+                    // ==================================
 
                     const {
                         data,
@@ -934,7 +804,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                         await supabaseClient.rpc(
                             'create_need',
                             {
-
                                 p_user_id:
                                     userData.user.id,
 
@@ -977,20 +846,19 @@ document.addEventListener('DOMContentLoaded', async () => {
                             'error'
                         );
 
-
                         return;
                     }
 
 
                     console.log(
-                        'NEED CREATED:',
+                        'CREATED NEED:',
                         data
                     );
 
 
-                    // ==============================
+                    // ==================================
                     // Success
-                    // ==============================
+                    // ==================================
 
                     showMessage(
                         'نیاز شما با موفقیت ثبت شد.',
@@ -1025,27 +893,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 } finally {
 
-                    if (submitButton) {
+                    submitButton.disabled =
+                        false;
 
-                        submitButton.disabled =
-                            false;
-
-                        submitButton.textContent =
-                            'ثبت نیاز';
-                    }
+                    submitButton.textContent =
+                        'ثبت نیاز';
                 }
-
             }
         );
     }
 
 
-    // ==============================
-    // Start Application
-    // ==============================
+    // ==========================================
+    // Start
+    // ==========================================
 
     await updateAuthState();
-
 
     await Promise.all([
         loadCategories(),
